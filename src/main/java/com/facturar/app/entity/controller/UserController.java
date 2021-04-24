@@ -1,6 +1,9 @@
 package com.facturar.app.entity.controller;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -65,6 +68,8 @@ public class UserController {
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(user.get()));
 	}
+	
+	//Delete
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable(value = "id") Long userId) {
@@ -75,7 +80,22 @@ public class UserController {
 
 		userService.deleteById(userId);
 
-		return ResponseEntity.ok().build();
+		return new ResponseEntity<>("Se ha eliminado el usuario con id: " + userId, HttpStatus.OK);
 	}
+	
+	
+	//Read all
+	
+	@GetMapping
+	public List<User> readAll(){
+		
+		List<User> users = StreamSupport
+				.stream(userService.findAll().spliterator(), false)
+				.collect(Collectors.toList());
+		
+		return users;
+		
+	}
+	
 
 }
