@@ -1,4 +1,4 @@
-package com.facturar.app.entity.repository;
+package com.facturar.app.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

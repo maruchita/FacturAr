@@ -1,4 +1,4 @@
-package com.facturar.app.entity.service;
+package com.facturar.app.service;
 
 import java.util.Optional;
 
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.facturar.app.entity.User;
-import com.facturar.app.entity.repository.UserRepository;
+import com.facturar.app.repository.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService {

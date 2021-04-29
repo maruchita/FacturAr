@@ -1,4 +1,4 @@
-package com.facturar.app.entity.service;
+package com.facturar.app.service;
 
 import java.util.Optional;
 

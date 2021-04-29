@@ -1,4 +1,4 @@
-package com.facturar.app.entity.controller;
+package com.facturar.app.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.facturar.app.entity.User;
-import com.facturar.app.entity.service.UserService;
+import com.facturar.app.service.UserService;
 
 @RestController
 @RequestMapping("/api/users")
