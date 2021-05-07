@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.facturar.app.entity.User;
+import com.facturar.app.entity.UserEntity;
 import com.facturar.app.service.UserService;
 
 @RestController
@@ -30,7 +30,7 @@ public class UserController {
 	// Create a new user
 
 	@PostMapping
-	public ResponseEntity<?> create(@RequestBody User user) {
+	public ResponseEntity<?> create(@RequestBody UserEntity user) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(user));
 	}
 
@@ -39,7 +39,7 @@ public class UserController {
 	@GetMapping("/{id}")
 	public ResponseEntity<?> read(@PathVariable(value = "id") Long userId) {
 
-		Optional<User> user = userService.findById(userId);
+		Optional<UserEntity> user = userService.findById(userId);
 
 		if (!user.isPresent()) {
 			return ResponseEntity.notFound().build();
@@ -52,9 +52,9 @@ public class UserController {
 	// Update User
 
 	@PutMapping("/{id}")
-	public ResponseEntity<?> update(@RequestBody User userDetails, @PathVariable(value = "id") Long userId) {
+	public ResponseEntity<?> update(@RequestBody UserEntity userDetails, @PathVariable(value = "id") Long userId) {
 
-		Optional<User> user = userService.findById(userId);
+		Optional<UserEntity> user = userService.findById(userId);
 
 		if (!user.isPresent()) {
 			return ResponseEntity.notFound().build();
@@ -62,9 +62,8 @@ public class UserController {
 
 		// BeanUtils.copyProperties(userDetails, user.get());
 		user.get().setName(userDetails.getName());
-		user.get().setSurname(userDetails.getSurname());
 		user.get().setEmail(userDetails.getEmail());
-		user.get().setEnable(userDetails.getEnable());
+		
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(user.get()));
 	}
@@ -87,9 +86,9 @@ public class UserController {
 	//Read all
 	
 	@GetMapping
-	public List<User> readAll(){
+	public List<UserEntity> readAll(){
 		
-		List<User> users = StreamSupport
+		List<UserEntity> users = StreamSupport
 				.stream(userService.findAll().spliterator(), false)
 				.collect(Collectors.toList());
 		
