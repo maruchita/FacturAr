@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "address")
 public class Address implements Serializable {
@@ -20,29 +22,35 @@ public class Address implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
-    
+	
+	@JsonIgnore
     @OneToOne(mappedBy = "address")
     private UserEntity user;
     
     private String street;
     
-    private String nro_street;
+    private String city;
+    
+    private String address_type_id;
+    
+    private String province_id;
+    
+    private String country_id;
 
 	public Address() {
 		
 	}
-
-	public Address(Long id, UserEntity user, String street, String nro_street) {
+	
+	public Address(Long id, UserEntity user, String street, String city, String address_type_id, String province_id,
+			String country_id) {
+		super();
 		this.id = id;
 		this.user = user;
 		this.street = street;
-		this.nro_street = nro_street;
-	}
-
-
-
-	public Long getId() {
-		return id;
+		this.city = city;
+		this.address_type_id = address_type_id;
+		this.province_id = province_id;
+		this.country_id = country_id;
 	}
 
 	public UserEntity getUser() {
@@ -61,16 +69,41 @@ public class Address implements Serializable {
 		this.street = street;
 	}
 
-	public String getNro_street() {
-		return nro_street;
+	public String getCity() {
+		return city;
 	}
 
-	public void setNro_street(String nro_street) {
-		this.nro_street = nro_street;
+	public void setCity(String city) {
+		this.city = city;
 	}
-	
-	
-    
+
+	public String getAddress_type_id() {
+		return address_type_id;
+	}
+
+	public void setAddress_type_id(String address_type_id) {
+		this.address_type_id = address_type_id;
+	}
+
+	public String getProvince_id() {
+		return province_id;
+	}
+
+	public void setProvince_id(String province_id) {
+		this.province_id = province_id;
+	}
+
+	public String getCountry_id() {
+		return country_id;
+	}
+
+	public void setCountry_id(String country_id) {
+		this.country_id = country_id;
+	}
+
+	public Long getId() {
+		return id;
+	}
     
 
 }
