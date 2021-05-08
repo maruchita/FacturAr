@@ -2,6 +2,7 @@ package com.facturar.app.entity;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -11,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "users")
@@ -23,8 +26,12 @@ public class UserEntity implements Serializable {
 	private Long id;
 
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id", referencedColumnName = "id")
+	@JoinColumn(name = "address_id", referencedColumnName = "id")
 	private Address address;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "phone_id", referencedColumnName = "id")
+	private Phone phone;
 
 	private String user_name;
 
@@ -37,6 +44,12 @@ public class UserEntity implements Serializable {
 	private String salt;
 
 	private String email;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date created_date;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date modified_date;
 
 	public UserEntity() {
 
@@ -101,9 +114,29 @@ public class UserEntity implements Serializable {
 	public Long getId() {
 		return id;
 	}
-	
-	
-	
-	
+
+	public Phone getPhone() {
+		return phone;
+	}
+
+	public void setPhone(Phone phone) {
+		this.phone = phone;
+	}
+
+	public Date getCreated_date() {
+		return created_date;
+	}
+
+	public void setCreated_date(Date created_date) {
+		this.created_date = created_date;
+	}
+
+	public Date getModified_date() {
+		return modified_date;
+	}
+
+	public void setModified_date(Date modified_date) {
+		this.modified_date = modified_date;
+	}
 
 }
